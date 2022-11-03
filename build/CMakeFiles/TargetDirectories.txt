@@ -1,4 +1,0 @@
-/home/downsl/Documents/clientserver/build/CMakeFiles/edit_cache.dir
-/home/downsl/Documents/clientserver/build/CMakeFiles/rebuild_cache.dir
-/home/downsl/Documents/clientserver/build/CMakeFiles/server.dir
-/home/downsl/Documents/clientserver/build/CMakeFiles/client.dir
