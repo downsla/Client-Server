@@ -1,0 +1,1 @@
+/usr/bin/g++  -lboost_system -pthread -g  -lboost_system -pthread -rdynamic CMakeFiles/client.dir/client.cpp.o -o client 

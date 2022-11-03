@@ -1,0 +1,1 @@
+/usr/bin/g++  -lboost_system -pthread -g  -lboost_system -pthread -rdynamic CMakeFiles/server.dir/server.cpp.o -o server 
