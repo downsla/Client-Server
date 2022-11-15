@@ -1,0 +1,32 @@
+\hypertarget{server_8cpp_source}{}\doxysection{server.\+cpp}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include <boost/asio.hpp>}}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00004}00004 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00007}00007 \textcolor{keywordtype}{int} main() \{}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00009}00009     \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00010}00010         boost::asio::io\_context io\_context;}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00012}00012         boost::asio::ip::tcp::acceptor acceptor(io\_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 1339));}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00014}00014         \textcolor{keywordflow}{while}(\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00015}00015             std::cout << \textcolor{stringliteral}{"{}Accepting"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00017}00017             boost::asio::ip::tcp::socket socket(io\_context);}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00018}00018             acceptor.accept(socket);}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00020}00020             std::cout << \textcolor{stringliteral}{"{}Connected"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00022}00022             std::string message = \textcolor{stringliteral}{"{}Hi"{}};}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00023}00023             boost::system::error\_code error;}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00025}00025             boost::asio::write(socket, boost::asio::buffer(message), error);}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00026}00026         \}}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00027}00027     \} \textcolor{keywordflow}{catch}(std::exception\& e) \{}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00028}00028         std::cerr << e.what() << std::endl;}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00029}00029     \}}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00031}00031     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{server_8cpp_source_l00032}00032 \}}
+
+\end{DoxyCode}

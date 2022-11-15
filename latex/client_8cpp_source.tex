@@ -1,0 +1,41 @@
+\hypertarget{client_8cpp_source}{}\doxysection{client.\+cpp}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include <boost/asio.hpp>}}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00003}00003 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00004}00004 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00005}00005 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) \{}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00006}00006     \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00007}00007         boost::asio::io\_context ioContext;}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00009}00009         boost::asio::ip::tcp::resolver resolver \{ioContext\};}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00010}00010         }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00011}00011         \textcolor{keyword}{auto} endpoints = resolver.resolve(\textcolor{stringliteral}{"{}127.0.0.1"{}}, \textcolor{stringliteral}{"{}1339"{}});}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00013}00013         boost::asio::ip::tcp::socket socket\{ioContext\};}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00014}00014         boost::asio::connect(socket, endpoints);}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00016}00016         \textcolor{keywordflow}{while}(\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00017}00017             std::array<char, 128> buf;}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00018}00018             }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00019}00019             boost::system::error\_code error;}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00021}00021             \textcolor{keywordtype}{size\_t} len = socket.read\_some(boost::asio::buffer(buf), error);}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00023}00023             \textcolor{keywordflow}{if}(error == boost::asio::error::eof) \{}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00024}00024                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00025}00025             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error) \{}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00026}00026                 \textcolor{keywordflow}{throw} boost::system::system\_error(error);}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00027}00027             \}}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00029}00029             std::cout.write(buf.data(), len);}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00030}00030         \}}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00031}00031     \} \textcolor{keywordflow}{catch}(std::exception\& e) \{}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00032}00032         std::cerr << e.what() << std::endl;}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00033}00033     \}}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00035}00035     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{client_8cpp_source_l00036}00036 \}}
+
+\end{DoxyCode}
