@@ -56,3 +56,5 @@ vscode/*
 /warnings.log
 tags
 .idea
+client
+server

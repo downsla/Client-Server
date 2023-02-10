@@ -1,32 +1,35 @@
-#include <iostream>
 #include <boost/asio.hpp>
+#include <array>
+#include <iostream>
+#include "network.h"
+
 //! Server
 /*!
 Opens port for accepting.
 */
-int main() {
-    //! try/catch
-    try {
-        boost::asio::io_context io_context;
+int main() 
+{
+    try 
+    {
+        boost::asio::io_context ioContext;
+        boost::asio::ip::tcp::endpoint endpoint = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string("127.0.0.1"), 1337);
+        boost::asio::ip::tcp::acceptor acceptor(ioContext, endpoint);
+        boost::asio::ip::tcp::socket socket(ioContext);
+        acceptor.accept(socket); //wait for connection
+        std::cout << "start" << std::endl;
 
-        boost::asio::ip::tcp::acceptor acceptor(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 1339));
-        //! loop        
-        while(true) {
-            std::cout << "Accepting" << std::endl;
+        boost::system::error_code error;
+        std::array<char, 3> buf;
+        //system("read -p 'enter'");
+        cmdRead(socket); //wait for command
+        //system("read -p 'enter'");
+        //cmdRead(socket);
 
-            boost::asio::ip::tcp::socket socket(io_context);
-            acceptor.accept(socket);
-
-            std::cout << "Connected" << std::endl;
-
-            std::string message = "Hi";
-            boost::system::error_code error;
-
-            boost::asio::write(socket, boost::asio::buffer(message), error);
-        }
-    } catch(std::exception& e) {
+        std::cout << "end" << std::endl;
+    } 
+    catch(std::exception& e) 
+    {
         std::cerr << e.what() << std::endl;
     }
-
     return 0;
 }
