@@ -58,3 +58,4 @@ tags
 .idea
 client
 server
+.vscode/settings.json
